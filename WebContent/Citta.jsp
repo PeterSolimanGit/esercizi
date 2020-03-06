@@ -16,9 +16,6 @@ body {
 		all' inizio</button>
 	<div align="center" style="margin-top: 50px;">
 		<h1>Lista città:</h1>
-
-
-
 		<c:forEach items="${cities}" var="ciao">
 			<p>città: ${ciao.name}</p>
 			<p>popolazione: ${ciao.population}</p>
