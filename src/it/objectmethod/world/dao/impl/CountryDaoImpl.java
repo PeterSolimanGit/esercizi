@@ -65,7 +65,7 @@ public class CountryDaoImpl implements ICountryDao {
 			stmt.setString(1, continentname);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
-				
+
 				countries = new CountryModel();
 				countries.setCode(rs.getString("Code"));
 				countries.setName(rs.getString("Name"));
@@ -91,10 +91,8 @@ public class CountryDaoImpl implements ICountryDao {
 				se.printStackTrace();
 			}
 		}
-	
+
 		return listCountries;
 	}
 
-	
-	}
-
+}

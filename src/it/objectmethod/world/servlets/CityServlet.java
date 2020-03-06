@@ -22,7 +22,6 @@ public class CityServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest richiesta, HttpServletResponse risposta)
 			throws ServletException, IOException {
 		String codicecitta = richiesta.getParameter("Code");
-
 		ICityDao cities = new ICityDaoImpl();
 		List<CityModel> city = null;
 		city = cities.getCityByCode(codicecitta);

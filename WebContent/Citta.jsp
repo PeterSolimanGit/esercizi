@@ -12,25 +12,18 @@ body {
 }
 </style>
 <body>
-<button name="indietro" onclick="location.href='/worldjdbc/servlet'">torna all' inizio</button>
+	<button name="indietro" onclick="location.href='/worldjdbc/servlet'">torna
+		all' inizio</button>
 	<div align="center" style="margin-top: 50px;">
 		<h1>Lista città:</h1>
-		
-		
-		
+
+
+
 		<c:forEach items="${cities}" var="ciao">
-			<p>città:  ${ciao.name} </p>    <p>popolazione:  ${ciao.population} </p> <br>
+			<p>città: ${ciao.name}</p>
+			<p>popolazione: ${ciao.population}</p>
+			<br>
 		</c:forEach>
-
-
-
-
-
-
-
-
-
-
 	</div>
 </body>
 </html>

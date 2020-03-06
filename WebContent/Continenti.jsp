@@ -15,18 +15,9 @@ body {
 	<div align="center" style="margin-top: 50px;">
 		<h1>Lista continenti:</h1>
 		<c:forEach items="${continents}" var="ciao">
-			<a href="/worldjdbc/pietro?continente=${ciao}">${ciao}</a> <br>
+			<a href="/worldjdbc/pietro?continente=${ciao}">${ciao}</a>
+			<br>
 		</c:forEach>
-
-
-
-
-
-
-
-
-
-
 	</div>
 </body>
 </html>

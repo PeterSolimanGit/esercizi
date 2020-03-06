@@ -27,7 +27,5 @@ public class CountryServlet extends HttpServlet {
 		country = countries.getCountryByContinent(nomecontinente);
 		richiesta.setAttribute("countries", country);
 		richiesta.getRequestDispatcher("/Nazioni.jsp").forward(richiesta, risposta);
-
 	}
-
 }

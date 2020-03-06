@@ -17,17 +17,6 @@ body {
 		<c:forEach items="${countries}" var="michele">
 		<a href="/worldjdbc/marcello?Code=${michele.code}">${michele.name}</a> <br>
 		</c:forEach>
-
-
-
-
-
-
-
-
-
-
-	</div>
+</div>
 </body>
 </html>
-<!--  -->
