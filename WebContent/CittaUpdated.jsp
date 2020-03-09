@@ -11,13 +11,15 @@ body {
 		url('https://cdn.crunchify.com/wp-content/uploads/2013/03/Crunchify.bg_.300.png');
 }
 </style>
-<body>
-	<div align="center" style="margin-top: 50px;">
-		<h1>Lista continenti:</h1>
-		<c:forEach items="${continents}" var="continente">
-			<a href="/worldjdbc/countries?continente=${continente}">${continente}</a>
-			<br>
-		</c:forEach>
-	</div>
-</body>
+<button name="indietro" onclick="location.href='/worldjdbc/continents'">torna
+	all' inizio</button>
+<div align="center" style="margin-top: 50px;">
+	<h1>Lista città:</h1>
+	<p>${messaggio}</p>
+	<c:forEach items="${cities}" var="citta">
+		<p>città: ${citta.name}</p>
+		<p>popolazione: ${citta.population}</p>
+		<br>
+	</c:forEach>
+</div>
 </html>

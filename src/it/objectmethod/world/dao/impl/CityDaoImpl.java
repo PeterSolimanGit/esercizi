@@ -11,7 +11,7 @@ import it.objectmethod.world.config.JdbcConnection;
 import it.objectmethod.world.dao.ICityDao;
 import it.objectmethod.world.model.CityModel;
 
-public class ICityDaoImpl implements ICityDao {
+public class CityDaoImpl implements ICityDao {
 	public List<CityModel> getCityByCode(String countrycode) {
 		List<CityModel> listCities = new ArrayList<>();
 		Connection conn = null;
@@ -20,7 +20,7 @@ public class ICityDaoImpl implements ICityDao {
 		CityModel cities = null;
 		try {
 			conn = JdbcConnection.getConnection();
-			String sql = "Select city.Name,city.Population from city inner join country on city.CountryCode = country.Code WHERE country.Code = ?";
+			String sql = "Select * from city WHERE city.CountryCode = ?";
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, countrycode);
 			rs = stmt.executeQuery();
@@ -29,7 +29,9 @@ public class ICityDaoImpl implements ICityDao {
 				cities = new CityModel();
 				cities.setName(rs.getString("Name"));
 				cities.setPopulation(rs.getString("Population"));
-
+				cities.setCountrycode(rs.getString("CountryCode"));
+				cities.setId(rs.getInt("ID"));
+				cities.setDistrict(rs.getString("District"));
 				listCities.add(cities);
 			}
 			rs.close();
@@ -51,10 +53,40 @@ public class ICityDaoImpl implements ICityDao {
 				se.printStackTrace();
 			}
 		}
-		int dimensionelista = listCities.size();
-		for (int posizione = 0; posizione < dimensionelista; posizione++)
-			System.out.println(listCities.get(posizione));
+
 		return listCities;
 	}
 
+	public void deleteCityByID(int cityid) {
+
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		try {
+			conn = JdbcConnection.getConnection();
+			String sql = "DELETE FROM city WHERE ID = ?";
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, cityid);
+			stmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+			} catch (SQLException se2) {
+			}
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+
+	}
 }

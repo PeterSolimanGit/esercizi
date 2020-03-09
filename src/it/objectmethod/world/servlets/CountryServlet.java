@@ -22,9 +22,9 @@ public class CountryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest richiesta, HttpServletResponse risposta)
 			throws ServletException, IOException {
 		String nomecontinente = richiesta.getParameter("continente");
-		ICountryDao countries = new CountryDaoImpl();
+		ICountryDao daoNazioni = new CountryDaoImpl();
 		List<CountryModel> country = null;
-		country = countries.getCountryByContinent(nomecontinente);
+		country = daoNazioni.getCountryByContinent(nomecontinente);
 		richiesta.setAttribute("countries", country);
 		richiesta.getRequestDispatcher("/Nazioni.jsp").forward(richiesta, risposta);
 	}

@@ -14,8 +14,8 @@ body {
 <body>
 	<div align="center" style="margin-top: 50px;">
 		<h1>Lista Nazioni:</h1>
-		<c:forEach items="${countries}" var="michele">
-		<a href="/worldjdbc/marcello?Code=${michele.code}">${michele.name}</a> <br>
+		<c:forEach items="${countries}" var="nazione">
+		<a href="/worldjdbc/cities?Code=${nazione.code}">${nazione.name}</a> <br>
 		</c:forEach>
 </div>
 </body>

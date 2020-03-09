@@ -22,8 +22,8 @@ public class ContinentServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<String> listContinent = new ArrayList<>();
-		ICountryDao continenti = new CountryDaoImpl();
-		listContinent = continenti.getContinent();
+		ICountryDao daoContinenti = new CountryDaoImpl();
+		listContinent = daoContinenti.getContinent();
 		req.setAttribute("continents", listContinent);
 		req.getRequestDispatcher("/Continenti.jsp").forward(req, resp);
 

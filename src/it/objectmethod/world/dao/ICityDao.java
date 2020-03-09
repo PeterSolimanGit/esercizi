@@ -6,4 +6,5 @@ import it.objectmethod.world.model.CityModel;
 
 public interface ICityDao {
 	public List<CityModel> getCityByCode(String countrycode);
+	public void deleteCityByID(int cityid);
 }

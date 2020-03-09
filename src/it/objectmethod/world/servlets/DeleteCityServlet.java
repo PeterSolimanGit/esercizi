@@ -12,21 +12,26 @@ import it.objectmethod.world.dao.ICityDao;
 import it.objectmethod.world.dao.impl.CityDaoImpl;
 import it.objectmethod.world.model.CityModel;
 
-public class CityServlet extends HttpServlet {
-
+public class DeleteCityServlet extends HttpServlet {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7970979120915108459L;
+	private static final long serialVersionUID = 204209658464417563L;
 
 	protected void doGet(HttpServletRequest richiesta, HttpServletResponse risposta)
 			throws ServletException, IOException {
-		String codicecitta = richiesta.getParameter("Code");
+
+		String idcitta = richiesta.getParameter("id");
+		String nomecitta = richiesta.getParameter("name");
+		String countrycode = richiesta.getParameter("countrycode");
+		int cityid = Integer.parseInt(idcitta);
+		String messaggiodelete = "Città " + nomecitta + " eliminata";
 		ICityDao daoCitta = new CityDaoImpl();
 		List<CityModel> city = null;
-		city = daoCitta.getCityByCode(codicecitta);
+	    daoCitta.deleteCityByID(cityid);
+	    city = daoCitta.getCityByCode(countrycode);
 		richiesta.setAttribute("cities", city);
-		richiesta.getRequestDispatcher("/Citta.jsp").forward(richiesta, risposta);
-
+		richiesta.setAttribute("messaggio", messaggiodelete);
+		richiesta.getRequestDispatcher("/CittaUpdated.jsp").forward(richiesta, risposta);
 	}
 }
