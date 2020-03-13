@@ -87,6 +87,42 @@ public class CityDaoImpl implements ICityDao {
 				se.printStackTrace();
 			}
 		}
+		}
+		public void insertCity(String name,String countrycode, int population,String district ) {
+
+			Connection conn = null;
+			PreparedStatement stmt = null;
+
+			try {
+				conn = JdbcConnection.getConnection();
+				String sql = "INSERT INTO city (Name, CountryCode, District, Population, )\n" + 
+						"VALUES (?, ?, ?, ?);";
+				stmt = conn.prepareStatement(sql);
+				stmt.setString(1, name);
+				stmt.setString(2, countrycode);
+				stmt.setString(3, district);
+				stmt.setInt(4, population);
+				
+				stmt.executeUpdate();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+			} finally {
+				try {
+					if (stmt != null) {
+						stmt.close();
+					}
+				} catch (SQLException se2) {
+				}
+				try {
+					if (conn != null) {
+						conn.close();
+					}
+				} catch (SQLException se) {
+					se.printStackTrace();
+				}
+			}
 
 	}
 }

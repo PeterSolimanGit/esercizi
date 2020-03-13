@@ -15,6 +15,9 @@ body {
 		all' inizio</button>
 	<div align="center" style="margin-top: 50px;">
 		<h1>Lista città:</h1>
+		<p>${messaggio}</p>
+		
+		<p> <a href="/worldjdbc/formsetup">Inserisci città</a></p>
 		<c:forEach items="${cities}" var="citta">
 			<p>città: ${citta.name}</p>
 			<p>popolazione: ${citta.population}</p>
@@ -26,6 +29,7 @@ body {
 			
 			<br>
 		</c:forEach>
+		
 	</div>
 </html>
 

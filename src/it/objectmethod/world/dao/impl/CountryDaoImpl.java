@@ -93,5 +93,85 @@ public class CountryDaoImpl implements ICountryDao {
 		}
 		return listCountries;
 	}
+	public List<CountryModel> getCountryByCountrycode(String countrycode) {
+		List<CountryModel> listCountries = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		CountryModel countries = null;
+		try {
+			conn = JdbcConnection.getConnection();
+			String sql = "SELECT Code, Name,Continent FROM country WHERE Continent = ?";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, countrycode);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
 
+				countries = new CountryModel();
+				countries.setCode(rs.getString("Code"));
+				countries.setName(rs.getString("Name"));
+				countries.setContinent(rs.getString("Continent"));
+				listCountries.add(countries);
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+			} catch (SQLException se2) {
+			}
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return listCountries;
+}
+	public List<CountryModel> getCountry() {
+		List<CountryModel> listCountries = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		CountryModel countries = null;
+		try {
+			conn = JdbcConnection.getConnection();
+			String sql = "SELECT * FROM country";
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+
+				countries = new CountryModel();
+				countries.setCode(rs.getString("Code"));
+				countries.setName(rs.getString("Name"));
+				countries.setContinent(rs.getString("Continent"));
+				listCountries.add(countries);
+			}
+			rs.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+				}
+			} catch (SQLException se2) {
+			}
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		return listCountries;
+	}
 }
