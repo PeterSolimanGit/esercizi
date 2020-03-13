@@ -20,10 +20,11 @@ public class InserimentoServlet extends HttpServlet {
 		int popolazione = Integer.parseInt(population);
 		String district = richiesta.getParameter("district");
 		String countrycode = richiesta.getParameter("ccnazione");
-		String messaggioaggiunta = "Città " + nomecitta + " eliminata";
+		String messaggioaggiunta = "Città " + nomecitta + " aggiunta";
 		ICityDao daoCitta = new CityDaoImpl();
 		daoCitta.insertCity(nomecitta, countrycode, popolazione, district);
 		richiesta.setAttribute("messaggio", messaggioaggiunta);
+		richiesta.setAttribute("Code", countrycode);
 		richiesta.getRequestDispatcher("cities").forward(richiesta, risposta);
 		
 		

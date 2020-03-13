@@ -10,7 +10,7 @@
 <body>
 <div align="center" style="margin-top: 50px;">
 		<h1>Inserisci città:</h1>
-<form action="/worldjdbc/inserisci?country=${continente}" method="get">
+<form action="/worldjdbc/inserisci?country=${countrycode}" method="get">
   <label for="name">Insert name:</label>
   <input type="text" id="name" name="name"><br><br>
   <label for="population">Insert population:</label>
