@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.objectmethod.world.dao.ICityDao;
 import it.objectmethod.world.dao.impl.CityDaoImpl;
+import it.objectmethod.world.model.CityModel;
 
 @SuppressWarnings("serial")
 public class InserimentoServlet extends HttpServlet {
@@ -17,16 +18,18 @@ public class InserimentoServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String nomecitta = richiesta.getParameter("name");
 		String population = richiesta.getParameter("population");
-		int popolazione = Integer.parseInt(population);
 		String district = richiesta.getParameter("district");
 		String countrycode = richiesta.getParameter("ccnazione");
 		String messaggioaggiunta = "Città " + nomecitta + " aggiunta";
 		ICityDao daoCitta = new CityDaoImpl();
-		daoCitta.insertCity(nomecitta, countrycode, popolazione, district);
+		CityModel city = new CityModel();
+		city.setName(nomecitta);
+		city.setPopulation(population);
+		city.setDistrict(district);
+		city.setCountrycode(countrycode);
+		daoCitta.insertCity(city);
 		richiesta.setAttribute("messaggio", messaggioaggiunta);
-		richiesta.setAttribute("Code", countrycode);
-		richiesta.getRequestDispatcher("cities").forward(richiesta, risposta);
-		
-		
+		richiesta.getRequestDispatcher("cities?Code=" + countrycode).forward(richiesta, risposta);
+
 	}
 }

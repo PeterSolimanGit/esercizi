@@ -25,10 +25,8 @@ public class DeleteCityServlet extends HttpServlet {
 		int cityid = Integer.parseInt(idcitta);
 		String messaggiodelete = "Città " + nomecitta + " eliminata";
 		ICityDao daoCitta = new CityDaoImpl();
-		
-	    daoCitta.deleteCityByID(cityid);
-	    richiesta.setAttribute("Code", countrycode);
+		daoCitta.deleteCityByID(cityid);
 		richiesta.setAttribute("messaggio", messaggiodelete);
-		richiesta.getRequestDispatcher("/cities").forward(richiesta, risposta);
+		richiesta.getRequestDispatcher("/cities?Code=" + countrycode).forward(richiesta, risposta);
 	}
 }

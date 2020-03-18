@@ -12,12 +12,13 @@ import it.objectmethod.world.dao.ICountryDao;
 import it.objectmethod.world.dao.impl.CountryDaoImpl;
 import it.objectmethod.world.model.CountryModel;
 
-public class FormServlet extends HttpServlet{
+public class FormServlet extends HttpServlet {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -1225124419013767576L;
+
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		ICountryDao daoNazioni = new CountryDaoImpl();
 		List<CountryModel> country = null;

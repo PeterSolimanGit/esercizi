@@ -24,7 +24,7 @@ public class CityServlet extends HttpServlet {
 		String codicecitta = richiesta.getParameter("Code");
 		ICityDao daoCitta = new CityDaoImpl();
 		List<CityModel> city = null;
-		city = daoCitta.getCityByCode(codicecitta);
+		city = daoCitta.getCityByCountrycode(codicecitta);
 		richiesta.setAttribute("cities", city);
 		richiesta.getRequestDispatcher("/Citta.jsp").forward(richiesta, risposta);
 

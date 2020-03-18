@@ -12,12 +12,12 @@ import it.objectmethod.world.dao.ICityDao;
 import it.objectmethod.world.model.CityModel;
 
 public class CityDaoImpl implements ICityDao {
-	public List<CityModel> getCityByCode(String countrycode) {
-		List<CityModel> listCities = new ArrayList<>();
+	public List<CityModel> getCityByCountrycode(String countrycode) {
+		List<CityModel> listCity = new ArrayList<>();
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		CityModel cities = null;
+		CityModel city = null;
 		try {
 			conn = JdbcConnection.getConnection();
 			String sql = "Select * from city WHERE city.CountryCode = ?";
@@ -26,13 +26,13 @@ public class CityDaoImpl implements ICityDao {
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 
-				cities = new CityModel();
-				cities.setName(rs.getString("Name"));
-				cities.setPopulation(rs.getString("Population"));
-				cities.setCountrycode(rs.getString("CountryCode"));
-				cities.setId(rs.getInt("ID"));
-				cities.setDistrict(rs.getString("District"));
-				listCities.add(cities);
+				city = new CityModel();
+				city.setName(rs.getString("Name"));
+				city.setPopulation(rs.getString("Population"));
+				city.setCountrycode(rs.getString("CountryCode"));
+				city.setId(rs.getInt("ID"));
+				city.setDistrict(rs.getString("District"));
+				listCity.add(city);
 			}
 			rs.close();
 		} catch (Exception e) {
@@ -54,7 +54,7 @@ public class CityDaoImpl implements ICityDao {
 			}
 		}
 
-		return listCities;
+		return listCity;
 	}
 
 	public void deleteCityByID(int cityid) {
@@ -87,42 +87,42 @@ public class CityDaoImpl implements ICityDao {
 				se.printStackTrace();
 			}
 		}
-		}
-		public void insertCity(String name,String countrycode, int population,String district ) {
+	}
 
-			Connection conn = null;
-			PreparedStatement stmt = null;
+	public void insertCity(CityModel city) {
 
+		Connection conn = null;
+		PreparedStatement stmt = null;
+
+		try {
+			conn = JdbcConnection.getConnection();
+			String sql = "INSERT INTO city (Name, CountryCode, District, Population )\n" + "VALUES (?, ?, ?, ?);";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, city.getName());
+			stmt.setString(2, city.getCountrycode());
+			stmt.setString(3, city.getDistrict());
+			stmt.setString(4, city.getPopulation());
+
+			stmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
 			try {
-				conn = JdbcConnection.getConnection();
-				String sql = "INSERT INTO city (Name, CountryCode, District, Population, )\n" + 
-						"VALUES (?, ?, ?, ?);";
-				stmt = conn.prepareStatement(sql);
-				stmt.setString(1, name);
-				stmt.setString(2, countrycode);
-				stmt.setString(3, district);
-				stmt.setInt(4, population);
-				
-				stmt.executeUpdate();
-
-			} catch (Exception e) {
-				e.printStackTrace();
-
-			} finally {
-				try {
-					if (stmt != null) {
-						stmt.close();
-					}
-				} catch (SQLException se2) {
+				if (stmt != null) {
+					stmt.close();
 				}
-				try {
-					if (conn != null) {
-						conn.close();
-					}
-				} catch (SQLException se) {
-					se.printStackTrace();
-				}
+			} catch (SQLException se2) {
 			}
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
 
 	}
 }

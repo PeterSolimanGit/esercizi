@@ -5,8 +5,9 @@ import java.util.List;
 import it.objectmethod.world.model.CountryModel;
 
 public interface ICountryDao {
-	 public List<String> getContinent();
-	 public List<CountryModel> getCountryByContinent(String continentname);
-	 public List<CountryModel> getCountryByCountrycode(String countrycode);
-	 public List<CountryModel> getCountry();
+	public List<String> getContinent();
+
+	public List<CountryModel> getCountryByContinent(String continentname);
+
+	public List<CountryModel> getCountry();
 }

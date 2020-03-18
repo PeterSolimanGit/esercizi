@@ -53,11 +53,11 @@ public class CountryDaoImpl implements ICountryDao {
 	}
 
 	public List<CountryModel> getCountryByContinent(String continentname) {
-		List<CountryModel> listCountries = new ArrayList<>();
+		List<CountryModel> listCountry = new ArrayList<>();
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		CountryModel countries = null;
+		CountryModel country = null;
 		try {
 			conn = JdbcConnection.getConnection();
 			String sql = "SELECT Code, Name,Continent FROM country WHERE Continent = ?";
@@ -66,11 +66,11 @@ public class CountryDaoImpl implements ICountryDao {
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 
-				countries = new CountryModel();
-				countries.setCode(rs.getString("Code"));
-				countries.setName(rs.getString("Name"));
-				countries.setContinent(rs.getString("Continent"));
-				listCountries.add(countries);
+				country = new CountryModel();
+				country.setCode(rs.getString("Code"));
+				country.setName(rs.getString("Name"));
+				country.setContinent(rs.getString("Continent"));
+				listCountry.add(country);
 			}
 			rs.close();
 		} catch (Exception e) {
@@ -91,55 +91,15 @@ public class CountryDaoImpl implements ICountryDao {
 				se.printStackTrace();
 			}
 		}
-		return listCountries;
+		return listCountry;
 	}
-	public List<CountryModel> getCountryByCountrycode(String countrycode) {
-		List<CountryModel> listCountries = new ArrayList<>();
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		CountryModel countries = null;
-		try {
-			conn = JdbcConnection.getConnection();
-			String sql = "SELECT Code, Name,Continent FROM country WHERE Continent = ?";
-			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, countrycode);
-			rs = stmt.executeQuery();
-			while (rs.next()) {
 
-				countries = new CountryModel();
-				countries.setCode(rs.getString("Code"));
-				countries.setName(rs.getString("Name"));
-				countries.setContinent(rs.getString("Continent"));
-				listCountries.add(countries);
-			}
-			rs.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		} finally {
-			try {
-				if (stmt != null) {
-					stmt.close();
-				}
-			} catch (SQLException se2) {
-			}
-			try {
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (SQLException se) {
-				se.printStackTrace();
-			}
-		}
-		return listCountries;
-}
 	public List<CountryModel> getCountry() {
-		List<CountryModel> listCountries = new ArrayList<>();
+		List<CountryModel> listCountry = new ArrayList<>();
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		CountryModel countries = null;
+		CountryModel country = null;
 		try {
 			conn = JdbcConnection.getConnection();
 			String sql = "SELECT * FROM country";
@@ -147,11 +107,11 @@ public class CountryDaoImpl implements ICountryDao {
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 
-				countries = new CountryModel();
-				countries.setCode(rs.getString("Code"));
-				countries.setName(rs.getString("Name"));
-				countries.setContinent(rs.getString("Continent"));
-				listCountries.add(countries);
+				country = new CountryModel();
+				country.setCode(rs.getString("Code"));
+				country.setName(rs.getString("Name"));
+				country.setContinent(rs.getString("Continent"));
+				listCountry.add(country);
 			}
 			rs.close();
 		} catch (Exception e) {
@@ -172,6 +132,6 @@ public class CountryDaoImpl implements ICountryDao {
 				se.printStackTrace();
 			}
 		}
-		return listCountries;
+		return listCountry;
 	}
 }
